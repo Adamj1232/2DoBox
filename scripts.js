@@ -5,6 +5,8 @@ function IdeaObj(id,ideaTitle,ideaBody) {
   this.quality = ' swill'
 }
 
+$('.save-button').prop('disabled', true);
+
 function newIdea(parsedOut) {
   $('.input-card-container').prepend(
   `<div class="input-card" id="${parsedOut.id}">
@@ -141,3 +143,13 @@ $('.input-body').on('keypress', function(e) {
 })
 
 persistMafk()
+
+$('input[type=text]').on('keyup', function() {
+  var titleInput = $('.input-title').val();
+  var bodyInput = $('.input-body').val();
+  if (titleInput !== '' && bodyInput !== '') {
+    $('.save-button').prop('disabled', false)
+  } else {
+    $('.save-button').prop('disabled', true)
+  }
+})

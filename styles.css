@@ -187,3 +187,7 @@ input {
     height: 45vh;
   }
 }
+
+  .save-button:disabled {
+    background-color: darkgrey;
+  }
