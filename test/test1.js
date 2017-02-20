@@ -39,6 +39,6 @@ function searchTest(driver) {
       }
     });
   });
-
+// does this work?
   driver.quit();
 }
