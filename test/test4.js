@@ -25,21 +25,26 @@ searchTest(driver_chr);
 // searchTest(driver_saf);
 
 function searchTest(driver) {
-  driver.get('file:///Users/spencer.hilvitz/turing/2DoBox/index.html');
-  driver.findElement(By.className('input-title')).sendKeys('plz');
+  driver.get('file:///Users/admin/Turing/2DoBoxPivot/index.html');
+  driver.findElement(By.className('input-title')).sendKeys('better');
+  driver.findElement(By.className('input-body')).sendKeys('work');
+  driver.findElement(By.className('save-button')).click();
+
+
+  driver.findElement(By.className('input-title')).sendKeys('must');
   driver.findElement(By.className('input-body')).sendKeys('work');
   driver.findElement(By.className('save-button')).click();
   driver.findElement(By.className('delete-btn')).click();
 
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('card-title')).getText().then(function(title) {
-      if(driver.findElement(By.className('input-card')) === null) {
+  driver.findElement(By.className('card-title')).getText().then(function(title) {
+      if(title === 'better')
+      {
         console.log('Test passed');
       } else {
         console.log('Test failed');
       }
-    });
-  });
-
+    })
+  })
   driver.quit();
 }
