@@ -31,14 +31,19 @@ function searchTest(driver) {
   driver.findElement(By.className('save-button')).click();
 
 
-  driver.findElement(By.className('input-title')).sendKeys('must');
-  driver.findElement(By.className('input-body')).sendKeys('work');
+  driver.findElement(By.className('input-title')).sendKeys('does not');
+  driver.findElement(By.className('input-body')).sendKeys('functionz');
   driver.findElement(By.className('save-button')).click();
-  driver.findElement(By.className('delete-btn')).click();
+
+  driver.findElement(By.className('input-title')).sendKeys('cats');
+  driver.findElement(By.className('input-body')).sendKeys('dogs');
+  driver.findElement(By.className('save-button')).click();
+
+  driver.findElement(By.className('search-text')).sendKeys('functionz');
 
   driver.sleep(3000).then(function() {
-  driver.findElement(By.className('card-title')).getText().then(function(title) {
-      if(title === 'better')
+  driver.findElement(By.className('card-body')).getText().then(function(body) {
+      if(body === 'functionz')
       {
         console.log('Test passed');
       } else {
