@@ -1,7 +1,7 @@
-function IdeaObj(id,ideaTitle,ideaBody) {
+function NewObj(id,userTitle,userBody) {
   this.id = id
-  this.title = ideaTitle
-  this.body = ideaBody
+  this.title = userTitle
+  this.body = userBody
   this.quality = ' swill'
 }
 
@@ -47,10 +47,10 @@ function newIdea(parsedOut) {
 
 $('.save-button').click(function() {
   var id = $.now()
-  var ideaTitle = $('.input-title').val()
-  var ideaBody = $('.input-body').val()
-  var ideaObj = new IdeaObj(id,ideaTitle,ideaBody)
-  var strungOut = JSON.stringify(ideaObj)
+  var userTitle = $('.input-title').val()
+  var userBody = $('.input-body').val()
+  var newObj = new NewObj(id,userTitle,userBody)
+  var strungOut = JSON.stringify(newObj)
   localStorage.setItem(id, strungOut)
   $('.input-title').val("")
   $('.input-body').val("")
@@ -60,8 +60,8 @@ $('.save-button').click(function() {
 
 $('.input-card-container').on('click', '.delete-btn', function() {
   $(this).parents().remove('.input-card')
-  var sensitive = $(this).parents('.input-card').attr('id')
-  localStorage.removeItem(sensitive)
+  var grabId = $(this).parents('.input-card').attr('id')
+  localStorage.removeItem(grabId)
 })
 
 $('.input-card-container').on('click', '.down-vote', function() {
@@ -119,10 +119,10 @@ $('.input-card-container').on('blur', '.card-body', function() {
 })
 
 $('.search-text').on('keyup', function(){
-  var lookFor = $(this).val().toLowerCase()
+  var searchToLowerCase = $(this).val().toLowerCase()
   $('.input-card').each(function(index, element){
     var text = $(element).children().text().toLowerCase();
-    var match = !!text.match(lookFor);
+    var match = !!text.match(searchToLowerCase);
     $(element).toggle(match);
   })
 })
