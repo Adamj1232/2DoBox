@@ -5,22 +5,44 @@ function IdeaObj(id,ideaTitle,ideaBody) {
   this.quality = ' swill'
 }
 
+disableButton();
+
+function disableButton() {
 $('.save-button').prop('disabled', true);
+};
+
+function setItem(updateValue, newValue) {
+  localStorage.setItem(
+    updateValue,JSON.stringify(
+      newValue)
+    )
+  }
+
+function persist() {
+  $('.input-card-container').html('')
+  for (var i = 0; i < localStorage.length; i++) {
+    var fromStorage = JSON.parse(
+      localStorage.getItem(
+        localStorage.key(i)
+      ))
+    newIdea(fromStorage)
+  }
+}
 
 function newIdea(parsedOut) {
   $('.input-card-container').prepend(
-  `<div class="input-card" id="${parsedOut.id}">
-    <div class="card-title-box">
+  `<section class="input-card" id="${parsedOut.id}">
+    <article class="card-title-box">
       <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
       <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
-    </div>
+    </article>
       <p class="card-body" contenteditable="true">${parsedOut.body}</p>
-    <div class="quality-box">
+    <article class="quality-box">
       <button class="quality-btns up-vote" type="button" name="button"><img class="quality-image" src="./images/upvote.svg" alt="up vote button"></button>
       <button class="quality-btns down-vote" type="button" name="button"><img class="quality-image" src="./images/downvote.svg" alt="down vote button"></button>
       <p class="quality-result">Quality: <p class="current-quality">${parsedOut.quality}</p></p>
-    </div>
-  </div>`)
+    </article>
+  </section>`)
 }
 
 $('.save-button').click(function() {
@@ -32,19 +54,9 @@ $('.save-button').click(function() {
   localStorage.setItem(id, strungOut)
   $('.input-title').val("")
   $('.input-body').val("")
-  persistMafk()
+  persist()
+  disableButton()
 })
-
-function persistMafk() {
-  $('.input-card-container').html('')
-  for (var i = 0; i < localStorage.length; i++) {
-    var fromStorage = JSON.parse(
-      localStorage.getItem(
-        localStorage.key(i)
-      ))
-    newIdea(fromStorage)
-  }
-}
 
 $('.input-card-container').on('click', '.delete-btn', function() {
   $(this).parents().remove('.input-card')
@@ -66,7 +78,7 @@ $('.input-card-container').on('click', '.down-vote', function() {
   }
   changeThisQuality.quality = newQual.text()
   localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
-  persistMafk()
+  persist()
 })
 
 $('.input-card-container').on('click', '.up-vote', function() {
@@ -83,7 +95,7 @@ $('.input-card-container').on('click', '.up-vote', function() {
   }
   changeThisQuality.quality = newQual.text()
   localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
-  persistMafk()
+  persist()
 })
 
 $('.input-card-container').on('blur', '.card-title', function() {
@@ -93,10 +105,7 @@ $('.input-card-container').on('blur', '.card-title', function() {
       updateTitle)
     )
   newTitleValue.title = $('.card-title').text()
-  localStorage.setItem(
-    updateTitle,JSON.stringify(
-      newTitleValue)
-    )
+  setItem(updateTitle, newTitleValue);
 })
 
 $('.input-card-container').on('blur', '.card-body', function() {
@@ -106,10 +115,7 @@ $('.input-card-container').on('blur', '.card-body', function() {
       updateBody)
     )
   newBodyValue.body = $('.card-body').text()
-  localStorage.setItem(
-    updateBody, JSON.stringify(
-      newBodyValue)
-    )
+  setItem(updateBody, newBodyValue);
 })
 
 $('.search-text').on('keyup', function(){
@@ -142,8 +148,6 @@ $('.input-body').on('keypress', function(e) {
   }
 })
 
-persistMafk()
-
 $('input[type=text]').on('keyup', function() {
   var titleInput = $('.input-title').val();
   var bodyInput = $('.input-body').val();
@@ -153,3 +157,5 @@ $('input[type=text]').on('keyup', function() {
     $('.save-button').prop('disabled', true)
   }
 })
+
+persist()
