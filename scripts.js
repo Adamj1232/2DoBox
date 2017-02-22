@@ -7,7 +7,7 @@ function NewObj(id,userTitle,userBody) {
 }
 
 window.onload = function() {
-  $('.input-card:not(.completedtrue)').slice(10).css('display','none');
+  $('.input-card').slice(10).css('display','none');
   $('.completedtrue').hide();
 }
 
@@ -105,7 +105,7 @@ $('.save-button').click(function() {
   localStorage.setItem(id, strungOut)
   $('.input-title').val("")
   $('.input-body').val("")
-  persist()
+  newIdea(newObj)
   disableButton()
   $('.input-card').slice(10).css('display','none');
 })
@@ -134,7 +134,6 @@ $('.input-card-container').on('click', '.down-vote', function() {
   }
   changeThisImportance.importance = newQual.text()
   localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
-  persist()
 })
 
 $('.input-card-container').on('click', '.up-vote', function() {
@@ -155,7 +154,6 @@ $('.input-card-container').on('click', '.up-vote', function() {
   }
   changeThisImportance.importance = newQual.text()
   localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
-  persist()
 })
 
 $('.input-card-container').on('blur', '.card-title', function() {
@@ -185,6 +183,11 @@ $('.search-text').on('keyup', function(){
     var match = !!text.match(searchToLowerCase);
     $(element).toggle(match);
   })
+})
+
+$('.search-text').on('focusout', function() {
+  $('.completedtrue').hide();
+  $('.input-card').slice(10).css('display','none');
 })
 
 $('.input-card-container').on('keypress','.card-title, .card-body', function(e){
@@ -218,4 +221,12 @@ $('input[type=text]').on('keyup', function() {
   }
 })
 
-persist()
+persist();
+
+$('.none').on('click', function() {
+  var importanceStatus = $('.current-importance').text();
+  console.log(importanceStatus);
+  // if (importanceStatus !== 'none') {
+  //   $(this).parent
+  // }
+})
