@@ -3,7 +3,16 @@ function NewObj(id,userTitle,userBody) {
   this.title = userTitle
   this.body = userBody
   this.quality = ' swill'
+  this.completed = false;
 }
+
+window.onload = function() {
+  $('.completedtrue').hide();
+}
+
+$('.showComplete').on('click', function (){
+  $('.completedtrue').show();
+})
 
 disableButton();
 
@@ -30,7 +39,7 @@ function persist() {
 
 function newIdea(parsedOut) {
   $('.input-card-container').prepend(
-  `<section class="input-card" id="${parsedOut.id}">
+  `<section class="input-card completed${parsedOut.completed}" id="${parsedOut.id}">
     <article class="card-title-box">
       <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
       <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
@@ -46,8 +55,16 @@ function newIdea(parsedOut) {
 }
 
 $('.input-card-container').on('click', '.completed-btn', function(){
-  $(this).closest('.input-card').toggleClass('completed')
+  var changeComplete = $(this).parents('.input-card').attr('id')
+  var changeThisComplete = JSON.parse(
+    localStorage.getItem(
+      changeComplete)
+    )
+  changeThisComplete.completed = true;
+  localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
+  persist()
 })
+
 
 $('.save-button').click(function() {
   var id = $.now()
