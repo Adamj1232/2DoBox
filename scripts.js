@@ -10,7 +10,7 @@ window.onload = function() {
   $('.completedtrue').hide();
 }
 
-$('.showComplete').on('click', function (){
+$('.showComplete').on('click', function(){
   $('.completedtrue').show();
 })
 
@@ -60,11 +60,18 @@ $('.input-card-container').on('click', '.completed-btn', function(){
     localStorage.getItem(
       changeComplete)
     )
-  changeThisComplete.completed = true;
+  toggleClass(changeThisComplete);
   localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
   persist()
 })
 
+function toggleClass(changeThisComplete) {
+  if (changeThisComplete.completed == true) {
+    changeThisComplete.completed = false;
+  } else {
+    changeThisComplete.completed = true;
+  }
+}
 
 $('.save-button').click(function() {
   var id = $.now()
