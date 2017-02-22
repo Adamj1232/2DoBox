@@ -7,7 +7,7 @@ function NewObj(id,userTitle,userBody) {
 }
 
 window.onload = function() {
-  $('.completed').hide();
+  $('.completedtrue').hide();
 }
 
 disableButton();
@@ -36,7 +36,7 @@ function persist() {
 
 function newIdea(parsedOut) {
   $('.input-card-container').prepend(
-  `<section class="input-card" id="${parsedOut.id}">
+  `<section class="input-card completed${parsedOut.completed}" id="${parsedOut.id}">
     <article class="card-title-box">
       <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
       <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
