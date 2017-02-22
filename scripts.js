@@ -1,41 +1,24 @@
-function IdeaObj(id,ideaTitle,ideaBody) {
+function NewObj(id,userTitle,userBody) {
   this.id = id
-  this.title = ideaTitle
-  this.body = ideaBody
+  this.title = userTitle
+  this.body = userBody
   this.quality = ' swill'
 }
 
+disableButton();
+
+function disableButton() {
 $('.save-button').prop('disabled', true);
+};
 
-function newIdea(parsedOut) {
-  $('.input-card-container').prepend(
-  `<div class="input-card" id="${parsedOut.id}">
-    <div class="card-title-box">
-      <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
-      <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
-    </div>
-      <p class="card-body" contenteditable="true">${parsedOut.body}</p>
-    <div class="quality-box">
-      <button class="quality-btns up-vote" type="button" name="button"><img class="quality-image" src="./images/upvote.svg" alt="up vote button"></button>
-      <button class="quality-btns down-vote" type="button" name="button"><img class="quality-image" src="./images/downvote.svg" alt="down vote button"></button>
-      <p class="quality-result">Quality: <p class="current-quality">${parsedOut.quality}</p></p>
-    </div>
-  </div>`)
-}
+function setItem(updateValue, newValue) {
+  localStorage.setItem(
+    updateValue,JSON.stringify(
+      newValue)
+    )
+  }
 
-$('.save-button').click(function() {
-  var id = $.now()
-  var ideaTitle = $('.input-title').val()
-  var ideaBody = $('.input-body').val()
-  var ideaObj = new IdeaObj(id,ideaTitle,ideaBody)
-  var strungOut = JSON.stringify(ideaObj)
-  localStorage.setItem(id, strungOut)
-  $('.input-title').val("")
-  $('.input-body').val("")
-  persistMafk()
-})
-
-function persistMafk() {
+function persist() {
   $('.input-card-container').html('')
   for (var i = 0; i < localStorage.length; i++) {
     var fromStorage = JSON.parse(
@@ -46,10 +29,44 @@ function persistMafk() {
   }
 }
 
+function newIdea(parsedOut) {
+  $('.input-card-container').prepend(
+  `<section class="input-card" id="${parsedOut.id}">
+    <article class="card-title-box">
+      <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
+      <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
+    </article>
+      <p class="card-body" contenteditable="true">${parsedOut.body}</p>
+    <article class="quality-box">
+      <button class="quality-btns up-vote" type="button" name="button"><img class="quality-image" src="./images/upvote.svg" alt="up vote button"></button>
+      <button class="quality-btns down-vote" type="button" name="button"><img class="quality-image" src="./images/downvote.svg" alt="down vote button"></button>
+      <p class="quality-result">Quality: <p class="current-quality">${parsedOut.quality}</p></p>
+      <button class="completed-btn" type="button" name="button">Completed</button>
+    </article>
+  </section>`)
+}
+
+$('.input-card-container').on('click', '.completed-btn', function(){
+  $(this).closest('.input-card').toggleClass('completed')
+})
+
+$('.save-button').click(function() {
+  var id = $.now()
+  var userTitle = $('.input-title').val()
+  var userBody = $('.input-body').val()
+  var newObj = new NewObj(id,userTitle,userBody)
+  var strungOut = JSON.stringify(newObj)
+  localStorage.setItem(id, strungOut)
+  $('.input-title').val("")
+  $('.input-body').val("")
+  persist()
+  disableButton()
+})
+
 $('.input-card-container').on('click', '.delete-btn', function() {
   $(this).parents().remove('.input-card')
-  var sensitive = $(this).parents('.input-card').attr('id')
-  localStorage.removeItem(sensitive)
+  var grabId = $(this).parents('.input-card').attr('id')
+  localStorage.removeItem(grabId)
 })
 
 $('.input-card-container').on('click', '.down-vote', function() {
@@ -66,7 +83,7 @@ $('.input-card-container').on('click', '.down-vote', function() {
   }
   changeThisQuality.quality = newQual.text()
   localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
-  persistMafk()
+  persist()
 })
 
 $('.input-card-container').on('click', '.up-vote', function() {
@@ -83,7 +100,7 @@ $('.input-card-container').on('click', '.up-vote', function() {
   }
   changeThisQuality.quality = newQual.text()
   localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
-  persistMafk()
+  persist()
 })
 
 $('.input-card-container').on('blur', '.card-title', function() {
@@ -93,10 +110,7 @@ $('.input-card-container').on('blur', '.card-title', function() {
       updateTitle)
     )
   newTitleValue.title = $('.card-title').text()
-  localStorage.setItem(
-    updateTitle,JSON.stringify(
-      newTitleValue)
-    )
+  setItem(updateTitle, newTitleValue);
 })
 
 $('.input-card-container').on('blur', '.card-body', function() {
@@ -106,17 +120,14 @@ $('.input-card-container').on('blur', '.card-body', function() {
       updateBody)
     )
   newBodyValue.body = $('.card-body').text()
-  localStorage.setItem(
-    updateBody, JSON.stringify(
-      newBodyValue)
-    )
+  setItem(updateBody, newBodyValue);
 })
 
 $('.search-text').on('keyup', function(){
-  var lookFor = $(this).val().toLowerCase()
+  var searchToLowerCase = $(this).val().toLowerCase()
   $('.input-card').each(function(index, element){
     var text = $(element).children().text().toLowerCase();
-    var match = !!text.match(lookFor);
+    var match = !!text.match(searchToLowerCase);
     $(element).toggle(match);
   })
 })
@@ -142,8 +153,6 @@ $('.input-body').on('keypress', function(e) {
   }
 })
 
-persistMafk()
-
 $('input[type=text]').on('keyup', function() {
   var titleInput = $('.input-title').val();
   var bodyInput = $('.input-body').val();
@@ -153,3 +162,5 @@ $('input[type=text]').on('keyup', function() {
     $('.save-button').prop('disabled', true)
   }
 })
+
+persist()
