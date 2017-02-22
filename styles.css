@@ -139,7 +139,7 @@ input {
   border: none;
 }
 
-.completed {
+.completedtrue {
   text-decoration: line-through;
   background-color: darkgrey;
   background-blend-mode: overlay;
