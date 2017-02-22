@@ -116,25 +116,25 @@ input {
   width: 100%;
 }
 
-.quality-box {
+.importance-box {
   display: flex;
   align-items: baseline;
 }
 
-.quality-result {
+.importance-result {
   font-size: 15pt;
   padding-top: 17px;
 }
 
-.quality-image {
+.importance-image {
   height: 35px;
 }
 
-.quality-result {
+.importance-result {
   display: flex;
 }
 
-.quality-btns, .delete-btn {
+.importance-btns, .delete-btn {
   background: transparent;
   border: none;
 }

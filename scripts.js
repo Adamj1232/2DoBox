@@ -2,7 +2,7 @@ function NewObj(id,userTitle,userBody) {
   this.id = id
   this.title = userTitle
   this.body = userBody
-  this.quality = ' swill'
+  this.importance = ' normal'
   this.completed = false;
 }
 
@@ -42,13 +42,13 @@ function newIdea(parsedOut) {
   `<section class="input-card completed${parsedOut.completed}" id="${parsedOut.id}">
     <article class="card-title-box">
       <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
-      <button class="delete-btn" type="button" name="button"><img class="quality-image" src="./images/delete.svg" alt="delete button"></img></button>
+      <button class="delete-btn" type="button" name="button"><img class="importance-image" src="./images/delete.svg" alt="delete button"></img></button>
     </article>
       <p class="card-body" contenteditable="true">${parsedOut.body}</p>
-    <article class="quality-box">
-      <button class="quality-btns up-vote" type="button" name="button"><img class="quality-image" src="./images/upvote.svg" alt="up vote button"></button>
-      <button class="quality-btns down-vote" type="button" name="button"><img class="quality-image" src="./images/downvote.svg" alt="down vote button"></button>
-      <p class="quality-result">Quality: <p class="current-quality">${parsedOut.quality}</p></p>
+    <article class="importance-box">
+      <button class="importance-btns up-vote" type="button" name="button"><img class="importance-image" src="./images/upvote.svg" alt="up vote button"></button>
+      <button class="importance-btns down-vote" type="button" name="button"><img class="importance-image" src="./images/downvote.svg" alt="down vote button"></button>
+      <p class="importance-result">Importance: <p class="current-importance">${parsedOut.importance}</p></p>
       <button class="completed-btn" type="button" name="button">Completed</button>
     </article>
   </section>`)
@@ -93,36 +93,44 @@ $('.input-card-container').on('click', '.delete-btn', function() {
 })
 
 $('.input-card-container').on('click', '.down-vote', function() {
-  var changeQuality = $(this).parents('.input-card').attr('id')
-  var changeThisQuality = JSON.parse(
+  var changeImportance = $(this).parents('.input-card').attr('id')
+  var changeThisImportance = JSON.parse(
     localStorage.getItem(
-      changeQuality)
-    )
-  var newQual = $(this).siblings('.current-quality')
-  if (newQual.text() == ' genius') {
-    newQual.text(' plausible')
-  } else if (newQual.text() == ' plausible') {
-    newQual.text(' swill')
+      changeImportance)
+  )
+  var newQual = $(this).siblings('.current-importance')
+  if (newQual.text() == ' critical') {
+    newQual.text(' high')
+  } else if (newQual.text() == ' high') {
+    newQual.text(' normal')
+  } else if (newQual.text() == ' normal') {
+    newQual.text(' low')
+  } else if (newQual.text() == ' low') {
+    newQual.text(' none')
   }
-  changeThisQuality.quality = newQual.text()
-  localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
+  changeThisImportance.importance = newQual.text()
+  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
   persist()
 })
 
 $('.input-card-container').on('click', '.up-vote', function() {
-  var changeQuality = $(this).parents('.input-card').attr('id')
-  var changeThisQuality = JSON.parse(
+  var changeImportance = $(this).parents('.input-card').attr('id')
+  var changeThisImportance = JSON.parse(
     localStorage.getItem(
-      changeQuality)
-    )
-  var newQual = $(this).siblings('.current-quality')
-  if (newQual.text() == ' swill') {
-    newQual.text(' plausible')
-  } else if (newQual.text() == ' plausible') {
-    newQual.text(' genius')
+      changeImportance)
+  )
+  var newQual = $(this).siblings('.current-importance')
+  if (newQual.text() == ' none') {
+    newQual.text(' low')
+  } else if (newQual.text() == ' low') {
+    newQual.text(' normal')
+  } else if (newQual.text() == ' normal') {
+    newQual.text(' high')
+  } else if (newQual.text() == ' high') {
+    newQual.text(' critical')
   }
-  changeThisQuality.quality = newQual.text()
-  localStorage.setItem(changeQuality, JSON.stringify(changeThisQuality))
+  changeThisImportance.importance = newQual.text()
+  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
   persist()
 })
 
