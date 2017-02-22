@@ -7,6 +7,7 @@ function NewObj(id,userTitle,userBody) {
 }
 
 window.onload = function() {
+  $('.input-card:not(.completedtrue)').slice(10).css('display','none');
   $('.completedtrue').hide();
 }
 
@@ -33,6 +34,9 @@ function persist() {
       localStorage.getItem(
         localStorage.key(i)
       ))
+  if (fromStorage.completed == true){
+    $('.completedtrue').hide();
+  }
     newIdea(fromStorage)
   }
 }
@@ -54,23 +58,42 @@ function newIdea(parsedOut) {
   </section>`)
 }
 
-$('.input-card-container').on('click', '.completed-btn', function(){
-  var changeComplete = $(this).parents('.input-card').attr('id')
-  var changeThisComplete = JSON.parse(
-    localStorage.getItem(
-      changeComplete)
-    )
-  toggleClass(changeThisComplete);
-  localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
-  persist()
+// $('.input-card-container').on('click', '.completed-btn', function(){
+//   var changeComplete = $(this).closest('.input-card').attr('id')
+//   var changeThisComplete = JSON.parse(
+//     localStorage.getItem(
+//       changeComplete)
+//     )
+//   toggleClass(changeThisComplete);
+//   localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
+//   // persist()
+//     $('.completedtrue').hide();
+// })
+//
+// function toggleClass(changeThisComplete) {
+//   if (changeThisComplete.completed == true) {
+//     changeThisComplete.completed = false;
+//   } else {
+//     changeThisComplete.completed = true;
+//   }
+// }
+
+$('.input-card-container').on('click', '.completed-btn',   function(){
+ var changeComplete =  $(this).closest('.input-card').attr('id')
+ var changeThisComplete = JSON.parse(localStorage.getItem(changeComplete))
+ if (changeThisComplete.completed == true) {
+   changeThisComplete.completed = false;
+   toggleClass($(this), changeComplete, changeThisComplete);
+ } else {
+   changeThisComplete.completed = true;
+   toggleClass($(this), changeComplete, changeThisComplete);
+ }
 })
 
-function toggleClass(changeThisComplete) {
-  if (changeThisComplete.completed == true) {
-    changeThisComplete.completed = false;
-  } else {
-    changeThisComplete.completed = true;
-  }
+function toggleClass(location, changeComplete, changeThisComplete) {
+ localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
+ location.closest('.input-card').toggleClass('completedtrue');
+ console.log(changeThisComplete)
 }
 
 $('.save-button').click(function() {
@@ -84,6 +107,7 @@ $('.save-button').click(function() {
   $('.input-body').val("")
   persist()
   disableButton()
+  $('.input-card').slice(10).css('display','none');
 })
 
 $('.input-card-container').on('click', '.delete-btn', function() {
