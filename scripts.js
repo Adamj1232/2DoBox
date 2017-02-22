@@ -3,6 +3,11 @@ function NewObj(id,userTitle,userBody) {
   this.title = userTitle
   this.body = userBody
   this.quality = ' swill'
+  this.completed = false;
+}
+
+window.onload = function() {
+  $('.completed').hide();
 }
 
 disableButton();
@@ -47,8 +52,16 @@ function newIdea(parsedOut) {
 }
 
 $('.input-card-container').on('click', '.completed-btn', function(){
-  $(this).closest('.input-card').toggleClass('completed')
+  var changeComplete = $(this).parents('.input-card').attr('id')
+  var changeThisComplete = JSON.parse(
+    localStorage.getItem(
+      changeComplete)
+    )
+  changeThisComplete.completed = true;
+  localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
+  persist()
 })
+
 
 $('.save-button').click(function() {
   var id = $.now()
