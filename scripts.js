@@ -41,9 +41,14 @@ function newIdea(parsedOut) {
       <button class="quality-btns up-vote" type="button" name="button"><img class="quality-image" src="./images/upvote.svg" alt="up vote button"></button>
       <button class="quality-btns down-vote" type="button" name="button"><img class="quality-image" src="./images/downvote.svg" alt="down vote button"></button>
       <p class="quality-result">Quality: <p class="current-quality">${parsedOut.quality}</p></p>
+      <button class="completed-btn" type="button" name="button">Completed</button>
     </article>
   </section>`)
 }
+
+$('.input-card-container').on('click', '.completed-btn', function(){
+  $(this).closest('.input-card').toggleClass('completed')
+})
 
 $('.save-button').click(function() {
   var id = $.now()

@@ -139,6 +139,12 @@ input {
   border: none;
 }
 
+.completed {
+  text-decoration: line-through;
+  background-color: darkgrey;
+  background-blend-mode: overlay;
+}
+
 @media screen and (min-width: 650px){
 
   input {
