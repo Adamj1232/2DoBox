@@ -13,10 +13,9 @@ $('.save-button').prop('disabled', true);
 
 function setItem(updateValue, newValue) {
   localStorage.setItem(
-    updateValue,JSON.stringify(
-      newValue)
-    )
-  }
+    updateValue,JSON.stringify(newValue)
+  )
+}
 
 function persist() {
   $('.input-card-container').html('')
@@ -108,7 +107,7 @@ $('.input-card-container').on('blur', '.card-title', function() {
   var newTitleValue = JSON.parse(
     localStorage.getItem(
       updateTitle)
-    )
+  )
   newTitleValue.title = $('.card-title').text()
   setItem(updateTitle, newTitleValue);
 })
