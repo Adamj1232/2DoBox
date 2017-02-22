@@ -10,6 +10,10 @@ window.onload = function() {
   $('.completedtrue').hide();
 }
 
+$('.showComplete').on('click', function (){
+  $('.completedtrue').show();
+})
+
 disableButton();
 
 function disableButton() {
