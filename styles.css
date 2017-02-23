@@ -6,10 +6,9 @@ body {
 }
 
 header {
-  padding-top: 3vh;
+  padding-top: 10px;
   text-align: center;
-  width: 100vw;
-  margin top: 0px;
+  width: 100%;
 }
 
 .top-box {
@@ -38,7 +37,7 @@ h1 {
 }
 
 header h1 {
-  margin-top: 1vh;
+  margin-top: 1%;
 }
 
 .input-field {
@@ -46,29 +45,24 @@ header h1 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 45vh;
-  margin-bottom: 2vh;
 }
 
 input {
-  font-size: 20pt;
-  width: 90vw;
-  height: 4vh;
+  font-size: 28px;
+  width: 90%;
+  height: 30px;
   font-family: 'Open Sans', sans-serif;
 }
 
 .card-body {
-  height: 20vh;
+  height: 50px;
 }
 
 .save-button {
   border: none;
   font-size: 25px;
   letter-spacing: 2px;
-  width: 90vw;
-}
-
-.save-button {
+  width: 90%;
   background-color: #00A79D;
   color: #FFFFFF;
   height: 6vh;
@@ -76,8 +70,8 @@ input {
 
 .search-input {
   text-align: center;
-  margin-bottom: 5vh;
-  margin-top: 5vh;
+  margin-bottom: 30px;
+  margin-top: 40px;
   width: 100%;
 }
 
@@ -158,25 +152,47 @@ input {
 }
 
 @media screen and (min-width: 650px){
-
   input {
-    width: 70vw;
+    width: 70%;
   }
 
+
   .save-button {
-    width: 70vw;
+    width: 70%;
+    margin-bottom: 20px;
   }
 
   .input-card {
     width: 70vw;
   }
 
+  .top-box {
+    height: 250px;
+  }
+
+  .input-title, .input-body {
+    margin-bottom: 20px;
+  }
 }
 
+  .completed-btn {
+    position: relative;
+    float: right;
+  }
+
+  .buttonSection button {
+    background: transparent;
+    border: none;
+  }
+
+  .buttonSection button:hover {
+    border-bottom: 1px solid black;
+  }
+  
 @media screen and (min-width: 850px) {
 
   header {
-    height: 7vh;
+    height: 15%;
   }
 
   .title1 {
@@ -192,17 +208,22 @@ input {
     margin-top: 15px;
   }
 
-  .input-body {
-    height: 5vh;
+  .input-field {
+    height: 30%;
+    margin: auto;
+    margin-bottom: 100px;
   }
 
-  .input-field {
-    height: 30vh;
-    margin-bottom: 0px;
+  .input-title {
+    margin-bottom: 20px;
+  }
+
+  .input-body {
+    margin-bottom: 20px;
   }
 
   .top-box {
-    height: 45vh;
+    height: 300px;
   }
 }
 
