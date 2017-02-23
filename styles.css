@@ -156,6 +156,43 @@ header h1 {
   border: none;
 }
 
+.delete-btn {
+  background: url('images/spritesheet.png') 0 0;
+  background-size: cover;
+  height: 35px;
+  width: 35px;
+}
+
+.delete-btn:hover {
+  background: url("images/spritesheet.png") 0 -37px;
+  background-size: cover;
+}
+
+.up-vote {
+  background: url('images/spritesheet.png') 0 -75px;
+  background-size: cover;
+  height: 35px;
+  width: 35px;
+}
+
+.up-vote:hover {
+  background: url('images/spritesheet.png') 0 -112px;
+  background-size: cover;
+}
+
+.down-vote {
+  background: url('images/spritesheet.png') 0 -150px;
+  background-size: cover;
+  height: 35px;
+  width: 35px;
+  margin-left: 10px;
+}
+
+.down-vote:hover {
+  background: url('images/spritesheet.png') 0 -188px;
+  background-size: cover;
+}
+
 .completedtrue {
   text-decoration: line-through;
   background-color: darkgrey;

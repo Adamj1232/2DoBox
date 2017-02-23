@@ -47,12 +47,12 @@ function newIdea(parsedOut) {
   `<section class="input-card completed${parsedOut.completed}" id="${parsedOut.id}">
     <article class="card-title-box">
       <h1 class="card-title" contenteditable="true">${parsedOut.title}</h1>
-      <button class="delete-btn" type="button" name="button"><img class="importance-image" src="./images/delete.svg" alt="delete button"></img></button>
+      <button class="delete-btn" type="button" name="button"></button>
     </article>
       <p class="card-body" contenteditable="true">${parsedOut.body}</p>
     <article class="importance-box">
-      <button class="importance-btns up-vote" type="button" name="button"><img class="importance-image" src="./images/upvote.svg" alt="up vote button"></button>
-      <button class="importance-btns down-vote" type="button" name="button"><img class="importance-image" src="./images/downvote.svg" alt="down vote button"></button>
+      <button class="importance-btns up-vote" type="button" name="button"></button>
+      <button class="importance-btns down-vote" type="button" name="button"></button>
       <p class="importance-result">Importance: <p class="current-importance">${parsedOut.importance}</p></p>
       <button class="completed-btn" type="button" name="button">Completed</button>
     </article>
