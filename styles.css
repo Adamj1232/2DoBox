@@ -3,24 +3,26 @@ body {
   box-sizing: border-box;
   padding: 0px;
   font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
-  padding-top: 10px;
-  text-align: center;
-  width: 100%;
+h1 {
+  margin: 0px;
+}
+
+header h1 {
+  margin-top: 1%;
 }
 
 .top-box {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  text-align: center;
   background-color: #E5F3F2;
-  width: 100vw;
-  height: 60vh;
-  margin: 0px;
-}
-
-h1 {
+  width: 100%;
+  height: 60%;
   margin: 0px;
 }
 
@@ -31,13 +33,12 @@ h1 {
 }
 
 .title2 {
+  transform: rotate(45deg);
+  display: inline-block;
   color: #6D6E71;
   font-family: 'Roboto Slab', serif;
   font-size: 34px;
-}
-
-header h1 {
-  margin-top: 1%;
+  margin-left: -10px;
 }
 
 .input-field {
@@ -45,27 +46,29 @@ header h1 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  width: 70%;
 }
 
-input {
+.input {
   font-size: 28px;
-  width: 90%;
+  width: 100%;
   height: 30px;
   font-family: 'Open Sans', sans-serif;
-}
-
-.card-body {
-  height: 50px;
 }
 
 .save-button {
   border: none;
   font-size: 25px;
   letter-spacing: 2px;
-  width: 90%;
+  width: 500px;
   background-color: #00A79D;
   color: #FFFFFF;
-  height: 6vh;
+  padding: 0px 30px 0px 30px;
+  height: 50%;
+}
+
+.card-body {
+  height: 50px;
 }
 
 .search-input {
@@ -84,7 +87,9 @@ input {
 }
 
 .search-text {
-  border: 1px solid darkgrey;
+  border: 1px solid grey;
+  font-size: 28px;
+  width: 70%;
 }
 
 .input-card-container {
@@ -94,15 +99,17 @@ input {
   font-size: 18px;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 100%;
 }
 
 .input-card {
+  display: flex;
+  flex-direction: column;
   border-bottom: 1px solid #D1D3D4;
   height: 120%;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 50%;
 }
 
 .card-title-box {
@@ -115,7 +122,7 @@ input {
 
 .card-title {
   font-size: 20pt;
-  width: 60%;
+  width: 95%;
 }
 
 .card-body {
@@ -125,11 +132,15 @@ input {
 .importance-box {
   display: flex;
   align-items: baseline;
+  vertical-align: middle;
+}
+
+.importance-box p {
+  margin: 0px 10px 20px;
 }
 
 .importance-result {
   font-size: 15pt;
-  padding-top: 17px;
 }
 
 .importance-image {
@@ -149,6 +160,10 @@ input {
   text-decoration: line-through;
   background-color: darkgrey;
   background-blend-mode: overlay;
+}
+
+.completed-btn {
+  margin-left: 20px;
 }
 
 @media screen and (min-width: 650px){
@@ -188,7 +203,7 @@ input {
   .buttonSection button:hover {
     border-bottom: 1px solid black;
   }
-  
+
 @media screen and (min-width: 850px) {
 
   header {
