@@ -251,3 +251,8 @@ function filter (searchImportance){
     $(this).closest('.input-card').toggle(match);
   })
 }
+
+$('.show-more').on('click', function(){
+  $('.input-card').show();
+  $('.completedtrue').hide();
+})
