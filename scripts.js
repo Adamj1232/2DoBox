@@ -13,6 +13,7 @@ window.onload = function() {
 
 $('.showComplete').on('click', function(){
   $('.completedtrue').show();
+  $('.completedfalse').hide();
 })
 
 disableButton();
@@ -58,26 +59,6 @@ function newIdea(parsedOut) {
   </section>`)
 }
 
-// $('.input-card-container').on('click', '.completed-btn', function(){
-//   var changeComplete = $(this).closest('.input-card').attr('id')
-//   var changeThisComplete = JSON.parse(
-//     localStorage.getItem(
-//       changeComplete)
-//     )
-//   toggleClass(changeThisComplete);
-//   localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
-//   // persist()
-//     $('.completedtrue').hide();
-// })
-//
-// function toggleClass(changeThisComplete) {
-//   if (changeThisComplete.completed == true) {
-//     changeThisComplete.completed = false;
-//   } else {
-//     changeThisComplete.completed = true;
-//   }
-// }
-
 $('.input-card-container').on('click', '.completed-btn',   function(){
  var changeComplete =  $(this).closest('.input-card').attr('id')
  var changeThisComplete = JSON.parse(localStorage.getItem(changeComplete))
@@ -93,7 +74,6 @@ $('.input-card-container').on('click', '.completed-btn',   function(){
 function toggleClass(location, changeComplete, changeThisComplete) {
  localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
  location.closest('.input-card').toggleClass('completedtrue');
- console.log(changeThisComplete)
 }
 
 $('.save-button').click(function() {
@@ -225,8 +205,49 @@ persist();
 
 $('.none').on('click', function() {
   var importanceStatus = $('.current-importance').text();
-  console.log(importanceStatus);
-  // if (importanceStatus !== 'none') {
-  //   $(this).parent
-  // }
+  if(importanceStatus !== '') {
+      $('current-importance').hide();
+  }
 })
+
+$('.all').on('click', function(){
+  $('.current-importance').closest('.input-card').toggle("");
+})
+
+$('.critical').on('click', function(){
+  var searchImportance = $(this).text();
+  filter(searchImportance);
+  $('.completedtrue').hide();
+})
+
+$('.high').on('click', function(){
+  var searchImportance = $(this).text();
+  filter(searchImportance);
+  $('.completedtrue').hide();
+})
+
+$('.normal').on('click', function(){
+  var searchImportance = $(this).text();
+  filter(searchImportance);
+  $('.completedtrue').hide();
+})
+
+$('.low').on('click', function(){
+  var searchImportance = $(this).text();
+  filter(searchImportance);
+  $('.completedtrue').hide();
+})
+
+$('.none').on('click', function(){
+  var searchImportance = $(this).text();
+  filter(searchImportance);
+  $('.completedtrue').hide();
+})
+
+function filter (searchImportance){
+  $('.current-importance').each(function(){
+    var text = $(this).text();
+    var match = !!text.match(searchImportance);
+    $(this).closest('.input-card').toggle(match);
+  })
+}
