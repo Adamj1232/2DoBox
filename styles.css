@@ -285,6 +285,11 @@ header h1 {
   .importance-result {
     margin-right: 10px;
   }
+
+  .completed-btn {
+    margin: 0 0 10px auto;
+    min-width: 60px;
+  }
 }
 @media screen and (min-width: 850px) {
 
