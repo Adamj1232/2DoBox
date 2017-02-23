@@ -68,6 +68,7 @@ $('.input-card-container').on('click', '.completed-btn',   function(){
  } else {
    changeThisComplete.completed = true;
    toggleClass($(this), changeComplete, changeThisComplete);
+   $('.input-card').removeClass('completedfalse');
  }
 })
 
@@ -208,10 +209,6 @@ $('.none').on('click', function() {
   if(importanceStatus !== '') {
       $('current-importance').hide();
   }
-})
-
-$('.all').on('click', function(){
-  $('.current-importance').closest('.input-card').toggle("");
 })
 
 $('.critical').on('click', function(){
