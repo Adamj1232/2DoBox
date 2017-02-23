@@ -11,7 +11,7 @@ window.onload = function() {
   $('.completedtrue').hide();
 }
 
-$('.showComplete').on('click', function(){
+$('.show-complete').on('click', function(){
   $('.completedtrue').show();
   $('.completedfalse').hide();
 })
@@ -68,7 +68,7 @@ $('.input-card-container').on('click', '.completed-btn',   function(){
  } else {
    changeThisComplete.completed = true;
    toggleClass($(this), changeComplete, changeThisComplete);
-   $('.input-card').removeClass('completedfalse');
+   $(this).parents('.input-card').removeClass('completedfalse');
  }
 })
 
