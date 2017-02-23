@@ -326,4 +326,8 @@ header h1 {
   .input-body {
     margin-bottom: 20px;
   }
+
+  .completed-btn {
+    margin: 0 0 10px auto;
+  }
 }
