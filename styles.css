@@ -8,8 +8,8 @@ body {
 h1 {
   margin: 0px;
   padding-top: 2%;
-  text-align: center;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 header h1 {
@@ -19,10 +19,10 @@ header h1 {
 .top-box {
   display: flex;
   flex-direction: column;
-  background-color: #E5F3F2;
   width: 100%;
   height: 70%;
   margin: 0px;
+  background-color: #E5F3F2;
 }
 
 .title1 {
@@ -32,13 +32,13 @@ header h1 {
 }
 
 .title2 {
-  transform: rotate(45deg);
   display: inline-block;
+  margin-left: -10px;
+  padding-right: 10px;
+  transform: rotate(45deg);
   color: #6D6E71;
   font-family: 'Roboto Slab', serif;
   font-size: 20px;
-  margin-left: -10px;
-  padding-right: 10px;
 }
 
 .input-field {
@@ -60,30 +60,21 @@ header h1 {
 
 .save-button {
   border: none;
+  padding: 0px 30px 0px 30px;
+  width: 100%;
+  height: 50%;
   font-size: 25px;
   letter-spacing: 2px;
-  width: 100%;
   background-color: #00A79D;
   color: #FFFFFF;
-  padding: 0px 30px 0px 30px;
-  height: 50%;
-}
-
-.save-button:disabled {
-  background-color: darkgrey;
 }
 
 .save-button:hover {
   background-color: #045E55;
 }
 
-.card-body {
-  height: 100px;
-  width: 100%;
-  color: #939598;
-  margin: 5px 0;
-  white-space: normal;
-  overflow: scroll;
+.save-button:disabled {
+  background-color: darkgrey;
 }
 
 .search-input {
@@ -100,12 +91,29 @@ header h1 {
   margin-bottom: 15px;
 }
 
-.buttonSection2{
+.buttonSection1 button {
+  background-color: #E5F3F2;
+}
+
+.buttonSection1 button:hover {
+  background-color: #00A79D;
+}
+
+.buttonSection2 {
   display: flex;
   justify-content: space-between;
   width: 80%;
   margin: auto;
   margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.buttonSection2 button {
+  background-color: #E5F3F2;
+}
+
+.buttonSection2 button:hover {
+  background-color: #00A79D;
 }
 
 .search-text {
@@ -119,6 +127,15 @@ header h1 {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+.card-body {
+  min-height: 100px;
+  width: 100%;
+  color: #939598;
+  margin: 5px 0;
+  white-space: normal;
+  overflow: scroll;
 }
 
 .input-card {
@@ -146,15 +163,16 @@ header h1 {
   display: flex;
   vertical-align: middle;
   flex-wrap: wrap;
-
-}
-
-.importance-box p {
-  margin: auto;
 }
 
 .importance-result {
   font-size: 16px;
+  margin: 10px 5px 25px auto;
+}
+
+.importance-btns, .delete-btn {
+  background: transparent;
+  border: none;
 }
 
 .importance-image {
@@ -163,11 +181,7 @@ header h1 {
 
 .current-importance {
   font-size: 16px;
-}
-
-.importance-btns, .delete-btn {
-  background: transparent;
-  border: none;
+  margin: 10px 5px 25px 5px;
 }
 
 .delete-btn {
@@ -178,7 +192,7 @@ header h1 {
 }
 
 .delete-btn:hover {
-  background: url("images/spritesheet.png") 0 -37px;
+  background: url("images/spritesheet.png") 0 -35px;
   background-size: cover;
 }
 
@@ -215,8 +229,18 @@ header h1 {
 
 .completed-btn {
   margin: auto;
-  width: 50%;
+  width: 100%;
   border: 1px solid black;
+  height: 50%;
+  font-size: 25px;
+  letter-spacing: 2px;
+  background-color: #D7D8DA;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.completed-btn:hover {
+  background-color: #00A79D;
 }
 
 @media screen and (min-width: 650px){
@@ -227,6 +251,10 @@ header h1 {
   h1 {
     width: 80%;
     margin: auto;
+  }
+
+  .top-box {
+    height: 250px;
   }
 
   .input-field {
@@ -244,23 +272,18 @@ header h1 {
     margin-top: 30px;
   }
 
-  .top-box {
-    height: 250px;
-  }
-
   .input-title, .input-body {
     width: 100%;
   }
 
-
   .buttonSection button {
-    background: transparent;
-    border: none;
     padding: 0px;
   }
-
-  .buttonSection button:hover {
-    text-decoration: 1px underline black;
+  .completed-btn {
+    width: 20%;
+  }
+  .importance-result {
+    margin-right: 10px;
   }
 }
 @media screen and (min-width: 850px) {
@@ -269,8 +292,22 @@ header h1 {
     height: 15%;
   }
 
+  .top-box {
+    height: 300px;
+  }
+
   .title1 {
     font-size: 64px;
+  }
+
+  .title2 {
+    font-size: 30px;
+  }
+
+  .input-field {
+    height: 30%;
+    margin: auto;
+    margin-bottom: 100px;
   }
 
   .title-box {
@@ -282,21 +319,11 @@ header h1 {
     margin-top: 15px;
   }
 
-  .input-field {
-    height: 30%;
-    margin: auto;
-    margin-bottom: 100px;
-  }
-
   .input-title {
     margin-bottom: 20px;
   }
 
   .input-body {
     margin-bottom: 20px;
-  }
-
-  .top-box {
-    height: 300px;
   }
 }
