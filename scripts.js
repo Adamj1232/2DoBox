@@ -1,26 +1,19 @@
+window.onload = function() {
+  $('.input-card').slice(10).css('display','none')
+  $('.completedtrue').hide()
+}
+
 function NewObj(id,userTitle,userBody) {
   this.id = id
   this.title = userTitle
   this.body = userBody
   this.importance = ' normal'
-  this.completed = false;
+  this.completed = false
 }
-
-window.onload = function() {
-  $('.input-card').slice(10).css('display','none');
-  $('.completedtrue').hide();
-}
-
-$('.show-complete').on('click', function(){
-  $('.completedtrue').show();
-  $('.completedfalse').hide();
-})
-
-disableButton();
 
 function disableButton() {
-$('.save-button').prop('disabled', true);
-};
+$('.save-button').prop('disabled', true)
+}
 
 function setItem(updateValue, newValue) {
   localStorage.setItem(
@@ -30,17 +23,20 @@ function setItem(updateValue, newValue) {
 
 function persist() {
   $('.input-card-container').html('')
-  for (var i = 0; i < localStorage.length; i++) {
+  for (var i = 0 i < localStorage.length i++) {
     var fromStorage = JSON.parse(
       localStorage.getItem(
         localStorage.key(i)
       ))
   if (fromStorage.completed == true){
-    $('.completedtrue').hide();
+    $('.completedtrue').hide()
   }
     newIdea(fromStorage)
   }
 }
+
+persist()
+disableButton()
 
 function newIdea(parsedOut) {
   $('.input-card-container').prepend(
@@ -59,23 +55,32 @@ function newIdea(parsedOut) {
   </section>`)
 }
 
+// Completed Button Functionality
+
+$('.show-complete').on('click', function(){
+  $('.completedtrue').show()
+  $('.completedfalse').hide()
+})
+
 $('.input-card-container').on('click', '.completed-btn',   function(){
- var changeComplete =  $(this).closest('.input-card').attr('id')
- var changeThisComplete = JSON.parse(localStorage.getItem(changeComplete))
- if (changeThisComplete.completed == true) {
-   changeThisComplete.completed = false;
-   toggleClass($(this), changeComplete, changeThisComplete);
- } else {
-   changeThisComplete.completed = true;
-   toggleClass($(this), changeComplete, changeThisComplete);
-   $(this).parents('.input-card').removeClass('completedfalse');
- }
+  var changeComplete =  $(this).closest('.input-card').attr('id')
+  var changeThisComplete = JSON.parse(localStorage.getItem(changeComplete))
+  if (changeThisComplete.completed == true) {
+    changeThisComplete.completed = false
+    toggleClass($(this), changeComplete, changeThisComplete)
+  } else {
+    changeThisComplete.completed = true
+    toggleClass($(this), changeComplete, changeThisComplete)
+    $(this).parents('.input-card').removeClass('completedfalse')
+  }
 })
 
 function toggleClass(location, changeComplete, changeThisComplete) {
  localStorage.setItem(changeComplete, JSON.stringify(changeThisComplete))
- location.closest('.input-card').toggleClass('completedtrue');
+ location.closest('.input-card').toggleClass('completedtrue')
 }
+
+// Save and Delete Button Functionality
 
 $('.save-button').click(function() {
   var id = $.now()
@@ -88,7 +93,7 @@ $('.save-button').click(function() {
   $('.input-body').val("")
   newIdea(newObj)
   disableButton()
-  $('.input-card').slice(10).css('display','none');
+  $('.input-card').slice(10).css('display','none')
 })
 
 $('.input-card-container').on('click', '.delete-btn', function() {
@@ -96,6 +101,8 @@ $('.input-card-container').on('click', '.delete-btn', function() {
   var grabId = $(this).parents('.input-card').attr('id')
   localStorage.removeItem(grabId)
 })
+
+// Change Card Importance
 
 $('.input-card-container').on('click', '.down-vote', function() {
   var changeImportance = $(this).parents('.input-card').attr('id')
@@ -137,6 +144,8 @@ $('.input-card-container').on('click', '.up-vote', function() {
   localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
 })
 
+// Edit Existing Cards
+
 $('.input-card-container').on('blur', '.card-title', function() {
   var updateTitle = $(this).parents('.input-card').attr('id')
   var newTitleValue = JSON.parse(
@@ -144,7 +153,7 @@ $('.input-card-container').on('blur', '.card-title', function() {
       updateTitle)
   )
   newTitleValue.title = $('.card-title').text()
-  setItem(updateTitle, newTitleValue);
+  setItem(updateTitle, newTitleValue)
 })
 
 $('.input-card-container').on('blur', '.card-body', function() {
@@ -154,22 +163,26 @@ $('.input-card-container').on('blur', '.card-body', function() {
       updateBody)
     )
   newBodyValue.body = $('.card-body').text()
-  setItem(updateBody, newBodyValue);
+  setItem(updateBody, newBodyValue)
 })
+
+// Search Functionality
 
 $('.search-text').on('keyup', function(){
   var searchToLowerCase = $(this).val().toLowerCase()
   $('.input-card').each(function(index, element){
-    var text = $(element).children().text().toLowerCase();
-    var match = !!text.match(searchToLowerCase);
-    $(element).toggle(match);
+    var text = $(element).children().text().toLowerCase()
+    var match = !!text.match(searchToLowerCase)
+    $(element).toggle(match)
   })
 })
 
 $('.search-text').on('focusout', function() {
-  $('.completedtrue').hide();
-  $('.input-card').slice(10).css('display','none');
+  $('.completedtrue').hide()
+  $('.input-card').slice(10).css('display','none')
 })
+
+// Disable Enter Default Behavior
 
 $('.input-card-container').on('keypress','.card-title, .card-body', function(e){
   if (e.which === 13){
@@ -192,9 +205,11 @@ $('.input-body').on('keypress', function(e) {
   }
 })
 
+// Disable Save Button
+
 $('input[type=text]').on('keyup', function() {
-  var titleInput = $('.input-title').val();
-  var bodyInput = $('.input-body').val();
+  var titleInput = $('.input-title').val()
+  var bodyInput = $('.input-body').val()
   if (titleInput !== '' && bodyInput !== '') {
     $('.save-button').prop('disabled', false)
   } else {
@@ -202,54 +217,47 @@ $('input[type=text]').on('keyup', function() {
   }
 })
 
-persist();
-
-$('.none').on('click', function() {
-  var importanceStatus = $('.current-importance').text();
-  if(importanceStatus !== '') {
-      $('current-importance').hide();
-  }
-})
-
-$('.critical').on('click', function(){
-  var searchImportance = $(this).text();
-  filter(searchImportance);
-  $('.completedtrue').hide();
-})
-
-$('.high').on('click', function(){
-  var searchImportance = $(this).text();
-  filter(searchImportance);
-  $('.completedtrue').hide();
-})
-
-$('.normal').on('click', function(){
-  var searchImportance = $(this).text();
-  filter(searchImportance);
-  $('.completedtrue').hide();
-})
-
-$('.low').on('click', function(){
-  var searchImportance = $(this).text();
-  filter(searchImportance);
-  $('.completedtrue').hide();
-})
-
-$('.none').on('click', function(){
-  var searchImportance = $(this).text();
-  filter(searchImportance);
-  $('.completedtrue').hide();
-})
+// Importance Button Functionality
 
 function filter (searchImportance){
   $('.current-importance').each(function(){
-    var text = $(this).text();
-    var match = !!text.match(searchImportance);
-    $(this).closest('.input-card').toggle(match);
+    var text = $(this).text()
+    var match = !!text.match(searchImportance)
+    $(this).closest('.input-card').toggle(match)
   })
 }
 
+$('.critical').on('click', function(){
+  var searchImportance = $(this).text()
+  filter(searchImportance)
+  $('.completedtrue').hide()
+})
+
+$('.high').on('click', function(){
+  var searchImportance = $(this).text()
+  filter(searchImportance)
+  $('.completedtrue').hide()
+})
+
+$('.normal').on('click', function(){
+  var searchImportance = $(this).text()
+  filter(searchImportance)
+  $('.completedtrue').hide()
+})
+
+$('.low').on('click', function(){
+  var searchImportance = $(this).text()
+  filter(searchImportance)
+  $('.completedtrue').hide()
+})
+
+$('.none').on('click', function(){
+  var searchImportance = $(this).text()
+  filter(searchImportance)
+  $('.completedtrue').hide()
+})
+
 $('.show-more').on('click', function(){
-  $('.input-card').show();
-  $('.completedtrue').hide();
+  $('.input-card').show()
+  $('.completedtrue').hide()
 })
