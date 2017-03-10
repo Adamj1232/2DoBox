@@ -7,7 +7,7 @@ function NewObj(id,userTitle,userBody) {
   this.id = id
   this.title = userTitle
   this.body = userBody
-  this.importance = ' normal'
+  this.importance = importanceArr[2]
   this.completed = false
 }
 
@@ -103,47 +103,71 @@ $('.input-card-container').on('click', '.delete-btn', function() {
 })
 
 // Change Card Importance
+var importanceArr = [' none', ' low', ' normal', ' high', ' critical']
 
 $('.input-card-container').on('click', '.down-vote', function() {
-  var changeImportance = $(this).parents('.input-card').attr('id')
-  var changeThisImportance = JSON.parse(
-    localStorage.getItem(
-      changeImportance)
-  )
-  var newQual = $(this).siblings('.current-importance')
-  if (newQual.text() == ' critical') {
-    newQual.text(' high')
-  } else if (newQual.text() == ' high') {
-    newQual.text(' normal')
-  } else if (newQual.text() == ' normal') {
-    newQual.text(' low')
-  } else if (newQual.text() == ' low') {
-    newQual.text(' none')
-  }
-  changeThisImportance.importance = newQual.text()
-  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
+  var changeImportance = $(this).closest('.input-card').attr('id');
+  var changeThisImportance = JSON.parse(localStorage.getItem(changeImportance));
+  var newImportance = $(this).siblings('.current-importance');
+  var importanceCounter = importanceArr.indexOf($(this).siblings('.current-importance').text())
+  console.log($(this).siblings('.current-importance').text())
+  importanceCounter--;
+  newImportance.text(importanceArr[importanceCounter]);
+  changeThisImportance.importance = newImportance.text();
+  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance));
 })
 
 $('.input-card-container').on('click', '.up-vote', function() {
-  var changeImportance = $(this).parents('.input-card').attr('id')
-  console.log(changeImportance)
-  var changeThisImportance = JSON.parse(
-    localStorage.getItem(
-      changeImportance)
-  )
-  var newQual = $(this).siblings('.current-importance')
-  if (newQual.text() == ' none') {
-    newQual.text(' low')
-  } else if (newQual.text() == ' low') {
-    newQual.text(' normal')
-  } else if (newQual.text() == ' normal') {
-    newQual.text(' high')
-  } else if (newQual.text() == ' high') {
-    newQual.text(' critical')
-  }
-  changeThisImportance.importance = newQual.text()
-  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
+  var changeImportance = $(this).closest('.input-card').attr('id');
+  var changeThisImportance = JSON.parse(localStorage.getItem(changeImportance));
+  var newImportance = $(this).siblings('.current-importance');
+  var importanceCounter = importanceArr.indexOf($(this).siblings('.current-importance').text())
+  importanceCounter++;
+  newImportance.text(importanceArr[importanceCounter]);
+  changeThisImportance.importance = newImportance.text();
+  localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance));
 })
+
+// $('.input-card-container').on('click', '.down-vote', function() {
+//   var changeImportance = $(this).parents('.input-card').attr('id')
+//   var changeThisImportance = JSON.parse(
+//     localStorage.getItem(
+//       changeImportance)
+//   )
+//   var newQual = $(this).siblings('.current-importance')
+//   if (newQual.text() == ' critical') {
+//     newQual.text(' high')
+//   } else if (newQual.text() == ' high') {
+//     newQual.text(' normal')
+//   } else if (newQual.text() == ' normal') {
+//     newQual.text(' low')
+//   } else if (newQual.text() == ' low') {
+//     newQual.text(' none')
+//   }
+//   changeThisImportance.importance = newQual.text()
+//   localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
+// })
+
+// $('.input-card-container').on('click', '.up-vote', function() {
+//   var changeImportance = $(this).parents('.input-card').attr('id')
+//   console.log(changeImportance)
+//   var changeThisImportance = JSON.parse(
+//     localStorage.getItem(
+//       changeImportance)
+//   )
+//   var newQual = $(this).siblings('.current-importance')
+//   if (newQual.text() == ' none') {
+//     newQual.text(' low')
+//   } else if (newQual.text() == ' low') {
+//     newQual.text(' normal')
+//   } else if (newQual.text() == ' normal') {
+//     newQual.text(' high')
+//   } else if (newQual.text() == ' high') {
+//     newQual.text(' critical')
+//   }
+//   changeThisImportance.importance = newQual.text()
+//   localStorage.setItem(changeImportance, JSON.stringify(changeThisImportance))
+// })
 
 // Edit Existing Cards
 
