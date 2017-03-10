@@ -155,7 +155,7 @@ header h1 {
 .card-title {
   font-size: 20pt;
   text-align: left;
-  width: 100%;
+  width: 85%;
   margin-bottom: 0px;
 }
 
@@ -276,9 +276,15 @@ header h1 {
     width: 100%;
   }
 
+  .card-title {
+    margin-left: 0px;
+    width: 92%;
+  }
+
   .buttonSection button {
     padding: 0px;
   }
+
   .completed-btn {
     width: 20%;
     margin: 0 0 10px auto;

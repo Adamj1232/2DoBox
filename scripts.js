@@ -17,7 +17,7 @@ $('.save-button').prop('disabled', true)
 
 function setItem(updateValue, newValue) {
   localStorage.setItem(
-    updateValue,JSON.stringify(newValue)
+    updateValue, JSON.stringify(newValue)
   )
 }
 
@@ -126,6 +126,7 @@ $('.input-card-container').on('click', '.down-vote', function() {
 
 $('.input-card-container').on('click', '.up-vote', function() {
   var changeImportance = $(this).parents('.input-card').attr('id')
+  console.log(changeImportance)
   var changeThisImportance = JSON.parse(
     localStorage.getItem(
       changeImportance)
@@ -146,13 +147,14 @@ $('.input-card-container').on('click', '.up-vote', function() {
 
 // Edit Existing Cards
 
+
 $('.input-card-container').on('blur', '.card-title', function() {
-  var updateTitle = $(this).parents('.input-card').attr('id')
+  var updateTitle = $(this).closest('.input-card').attr('id')
   var newTitleValue = JSON.parse(
     localStorage.getItem(
       updateTitle)
   )
-  newTitleValue.title = $('.card-title').text()
+  newTitleValue.title = $(this).text()
   setItem(updateTitle, newTitleValue)
 })
 
@@ -162,7 +164,7 @@ $('.input-card-container').on('blur', '.card-body', function() {
     localStorage.getItem(
       updateBody)
     )
-  newBodyValue.body = $('.card-body').text()
+  newBodyValue.body = $(this).text()
   setItem(updateBody, newBodyValue)
 })
 
